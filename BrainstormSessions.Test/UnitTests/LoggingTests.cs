@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BrainstormSessions.Api;
+﻿using BrainstormSessions.Api;
 using BrainstormSessions.Controllers;
 using BrainstormSessions.Core.Interfaces;
 using BrainstormSessions.Core.Model;
@@ -10,6 +6,10 @@ using log4net.Appender;
 using log4net.Config;
 using log4net.Core;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace BrainstormSessions.Test.UnitTests

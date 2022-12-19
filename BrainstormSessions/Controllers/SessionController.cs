@@ -1,13 +1,15 @@
-﻿using System.Threading.Tasks;
-using BrainstormSessions.Core.Interfaces;
+﻿using BrainstormSessions.Core.Interfaces;
 using BrainstormSessions.ViewModels;
+using log4net;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace BrainstormSessions.Controllers
 {
     public class SessionController : Controller
     {
         private readonly IBrainstormSessionRepository _sessionRepository;
+        private readonly ILog _log = LogManager.GetLogger(typeof(HomeController));
 
         public SessionController(IBrainstormSessionRepository sessionRepository)
         {
@@ -34,6 +36,9 @@ namespace BrainstormSessions.Controllers
                 Name = session.Name,
                 Id = session.Id
             };
+
+            _log.Debug("View model returned");
+            _log.Debug("Message 2");
 
             return View(viewModel);
         }

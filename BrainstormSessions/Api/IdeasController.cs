@@ -1,17 +1,20 @@
-﻿using System;
+﻿using BrainstormSessions.ClientModels;
+using BrainstormSessions.Controllers;
+using BrainstormSessions.Core.Interfaces;
+using BrainstormSessions.Core.Model;
+using log4net;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BrainstormSessions.ClientModels;
-using BrainstormSessions.Core.Interfaces;
-using BrainstormSessions.Core.Model;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BrainstormSessions.Api
 {
     public class IdeasController : ControllerBase
     {
         private readonly IBrainstormSessionRepository _sessionRepository;
+        private readonly ILog _log = LogManager.GetLogger(typeof(HomeController));
 
         public IdeasController(IBrainstormSessionRepository sessionRepository)
         {
@@ -40,7 +43,7 @@ namespace BrainstormSessions.Api
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody]NewIdeaModel model)
+        public async Task<IActionResult> Create([FromBody] NewIdeaModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -97,10 +100,11 @@ namespace BrainstormSessions.Api
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<BrainstormSession>> CreateActionResult([FromBody]NewIdeaModel model)
+        public async Task<ActionResult<BrainstormSession>> CreateActionResult([FromBody] NewIdeaModel model)
         {
             if (!ModelState.IsValid)
             {
+                _log.Error("Model State Is Invalid");
                 return BadRequest(ModelState);
             }
 
